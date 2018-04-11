@@ -1,0 +1,14 @@
+c:\users\brgy. sabang\documents\visual studio 2010\Projects\Pillar\Pillar\obj\Debug\Pillar.csprojResolveAssemblyReference.cache
+c:\users\brgy. sabang\documents\visual studio 2010\Projects\Pillar\Pillar\bin\Debug\Pillar.dll
+c:\users\brgy. sabang\documents\visual studio 2010\Projects\Pillar\Pillar\bin\Debug\Pillar.pdb
+c:\users\brgy. sabang\documents\visual studio 2010\Projects\Pillar\Pillar\bin\Debug\CSScriptLibrary.dll
+c:\users\brgy. sabang\documents\visual studio 2010\Projects\Pillar\Pillar\bin\Debug\Mono.CSharp.dll
+c:\users\brgy. sabang\documents\visual studio 2010\Projects\Pillar\Pillar\obj\Debug\Pillar.dll
+c:\users\brgy. sabang\documents\visual studio 2010\Projects\Pillar\Pillar\obj\Debug\Pillar.pdb
+F:\Projects\Pillar\Pillar\bin\Debug\Pillar.dll
+F:\Projects\Pillar\Pillar\bin\Debug\Pillar.pdb
+F:\Projects\Pillar\Pillar\obj\Debug\Pillar.csprojResolveAssemblyReference.cache
+F:\Projects\Pillar\Pillar\obj\Debug\Pillar.csproj.CoreCompileInputs.cache
+F:\Projects\Pillar\Pillar\obj\Debug\Pillar.csproj.CopyComplete
+F:\Projects\Pillar\Pillar\obj\Debug\Pillar.dll
+F:\Projects\Pillar\Pillar\obj\Debug\Pillar.pdb
