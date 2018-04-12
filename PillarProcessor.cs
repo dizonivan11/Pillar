@@ -37,7 +37,7 @@ namespace Pillar
                     string method = request.HttpMethod.ToUpperInvariant();
                     Console.WriteLine("{0}: {1}", method, requestUrl);
 
-                    NameValueCollection POST = new NameValueCollection();
+                    Dictionary<string, string> POST = new Dictionary<string, string>();
                     if (method == "POST") {
                         StreamReader body = new StreamReader(request.InputStream, request.ContentEncoding);
                         string postContent = body.ReadToEnd();
@@ -56,8 +56,9 @@ namespace Pillar
                             POST.Add(keyvalue[0], keyvalue[1]);
                         }
                     }
-                    NameValueCollection GET = request.QueryString;
-                    
+                    Dictionary<string, string> GET = new Dictionary<string, string>();
+                    foreach (string key in request.QueryString.Keys) GET.Add(key, request.QueryString[key]);
+
                     foreach (string key in POST.Keys) Console.WriteLine("POST-DATA: {0}={1}", key, POST[key]);
                     foreach (string key in GET.Keys) Console.WriteLine("GET-DATA: {0}={1}", key, GET[key]);
                     

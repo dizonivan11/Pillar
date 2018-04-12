@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.Specialized;
 using Microsoft.CSharp;
 using CSScriptLibrary;
-using System.Collections.Specialized;
-using System.Net;
-using System.Web;
 
 namespace Pillar {
     public static class View {
@@ -14,11 +10,12 @@ namespace Pillar {
         const string CSSTART = "<csharp>";
         const string CSEND = "</csharp>";
 
-        public static string ToHtml(this string phtml, NameValueCollection POST, NameValueCollection GET) {
+        public static string ToHtml(this string phtml, Dictionary<string, string> POST, Dictionary<string, string> GET) {
             // normalize html variable first before returning it.
             // This variable contains internal CSharp code (using special tags) which must be converted to html.
             string html = phtml;
-            
+
+            Dictionary<string, object> VAR = new Dictionary<string, object>();
             int startTag = html.IndexOf(CSSTART);
             while (startTag > -1) {
                 int endTag = html.IndexOf(CSEND);
@@ -29,67 +26,37 @@ namespace Pillar {
                 string format =
                     "using System;" +
                     "using System.Collections.Generic;" +
+                    "using System.Collections.Specialized;" +
                     "using System.Text;" +
                     // css_include <filename>
                     "" +
                     "public class Script {{" +
                     "   StringBuilder returnValue = new StringBuilder();" +
-                    "   DataManager POST = new DataManager();" +
-                    "   DataManager GET = new DataManager();" +
-                    "   VariableManager VAR = new VariableManager();" +
-                    "" +
-                    "   public Script() {{" +
-                    "       {0}" +
-                    "   }}" +
+                    "   public Dictionary<string, string> POST = new Dictionary<string, string>();" +
+                    "   public Dictionary<string, string> GET = new Dictionary<string, string>();" +
+                    "   public Dictionary<string, object> VAR = new Dictionary<string, object>();" +
                     "" +
                     "   public void Echo(string format, params object[] args) {{" +
                     "       returnValue.Append(string.Format(format, args));" +
                     "   }}" +
                     "" +
-                    "   public string Main() {{" +
+                    "   public string Run(Dictionary<string, string> POST, Dictionary<string, string> GET, Dictionary<string, object> VAR) {{" +
+                    "       this.POST = POST;" +
+                    "       this.GET = GET;" +
+                    "       this.VAR = VAR;" +
                     "       try {{" +
-                    "           {1}" +
+                    "           {0}" +
                     "       }} catch (Exception ex) {{" +
                     "           Echo(\"<b style='color: red;'>RUNTIME ERROR: \" + ex.Message + \"</b>\");" +
                     "       }}" +
                     "       return returnValue.ToString();" +
                     "   }}" +
-                    "}}" +
-                    "" +
-                    "public class DataManager : Dictionary<string, string> {{" +
-                    "   public string this[string key] {{" +
-                    "       get {{" +
-                    "           if (!ContainsKey(key)) Add(key, string.Empty);" +
-                    "           return base[key];" +
-                    "       }}" +
-                    "   }}" +
-                    "}}" +
-                    "" +
-                    "public class VariableManager : Dictionary<string, object> {{" +
-                    "   public object this[string key] {{" +
-                    "       get {{" +
-                    "           if (!ContainsKey(key)) Add(key, null);" +
-                    "           return base[key];" +
-                    "       }}" +
-                    "       set {{" +
-                    "           if (!ContainsKey(key)) Add(key, value);" +
-                    "           else base[key] = value;" +
-                    "       }}" +
-                    "   }}" +
                     "}}";
 
                 try {
-                    StringBuilder data = new StringBuilder();
-                    foreach (string key in POST.Keys)
-                        data.AppendFormat("     POST.Add(\"{0}\", \"{1}\");\n",
-                            HttpUtility.UrlDecode(key),
-                            HttpUtility.UrlDecode(POST[key]));
-                    foreach (string key in GET.Keys)
-                        data.AppendFormat("     GET.Add(\"{0}\", \"{1}\");\n",
-                            HttpUtility.UrlDecode(key),
-                            HttpUtility.UrlDecode(GET[key]));
-                    dynamic script = CSScript.Evaluator.LoadCode(string.Format(format, data, csCode));
-                    string returnValue = script.Main();
+                    dynamic script = CSScript.Evaluator.LoadCode(string.Format(format, csCode));
+                    string returnValue = script.Run(POST, GET, VAR);
+                    VAR = script.VAR;
                     html = html.Replace(csTag, returnValue);
                 }
                 catch (Exception ex) {
