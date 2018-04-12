@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Net;
 using System.IO;
-using System.Collections.Specialized;
+using System.Web;
 
 namespace Pillar
 {
@@ -48,16 +48,16 @@ namespace Pillar
                             for (int i = 0; i < keyvalues.Length; i++) {
                                 if (keyvalues[i].IndexOf('=') > -1) {
                                     string[] keyvalue = keyvalues[i].Split(new string[] { "=" }, StringSplitOptions.None);
-                                    POST.Add(keyvalue[0], keyvalue[1]);
+                                    POST.Add(keyvalue[0], HttpUtility.UrlDecode(keyvalue[1]));
                                 }
                             }
                         } else if (postContent.IndexOf('=') > -1) {
                             string[] keyvalue = postContent.Split(new string[] { "=" }, StringSplitOptions.None);
-                            POST.Add(keyvalue[0], keyvalue[1]);
+                            POST.Add(keyvalue[0], HttpUtility.UrlDecode(keyvalue[1]));
                         }
                     }
                     Dictionary<string, string> GET = new Dictionary<string, string>();
-                    foreach (string key in request.QueryString.Keys) GET.Add(key, request.QueryString[key]);
+                    foreach (string key in request.QueryString.Keys) GET.Add(key, HttpUtility.UrlDecode(request.QueryString[key]));
 
                     foreach (string key in POST.Keys) Console.WriteLine("POST-DATA: {0}={1}", key, POST[key]);
                     foreach (string key in GET.Keys) Console.WriteLine("GET-DATA: {0}={1}", key, GET[key]);
