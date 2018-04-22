@@ -1,7 +1,7 @@
 # Pillar
 
 > Pillar is a C# web framework that uses the power of .NET Framework for creating dynamic pages easily with the help of CSScript Library for scripting.
-> There are currently three (3) levels of tags. (1) **Function level** which is executed inside the Main function and uses a tag _<csharp>_. (2) **Class level** which contains a functions and can declare a user-defined function, it uses a tag _<csharp-func>_. (3) And **Namespace level** which contains a classes and can declare a user-defined class, it uses a tag _<csharp-class>_.
+> There are currently three (3) levels of tags. (1) **Function level** which is executed inside the Main function and uses a tag **<csharp>**. (2) **Class level** which contains a functions and can declare a user-defined function, it uses a tag **<csharp-func>**. (3) And **Namespace level** which contains a classes and can declare a user-defined class, it uses a tag **<csharp-class>**.
 
 An example usage of the framework.
 ```csharp
