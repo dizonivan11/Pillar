@@ -2,7 +2,7 @@
 ## A CSharp Web Framework
 
 An example usage of the framework.
-'''csharp
+```csharp
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,4 +61,4 @@ An example usage of the framework.
 	</csharp-class>
 </body>
 </html>
-'''
+```
