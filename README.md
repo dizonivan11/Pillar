@@ -62,3 +62,37 @@ An example usage of the framework.
 </body>
 </html>
 ```
+
+Post and Get Forms
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Contact Info</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<a href="../index">Go Back</a>
+		<h1>Contact Us</h1>
+		<img src="aesir.png">
+		<hr>
+		<h2>POST FORM</h2>
+		<form action="../index?action=submitted" method="POST">
+			Full Name: <input type="text" name="fullname"><br>
+			Mobile: <input type="text" name="mobile"><br>
+			Feedback: <input type="text" name="feedback"><br>
+			<input type="submit" name="btnSubmit">
+		</form>
+		<hr>
+		<h2>GET FORM</h2>
+		<form action="../index.phtml" method="GET">
+			Full Name: <input type="text" name="fullname"><br>
+			Mobile: <input type="text" name="mobile"><br>
+			Feedback: <input type="text" name="feedback"><br>
+			<input type="submit" name="btnSubmit">
+		</form>
+	</body>
+</html>
+```
