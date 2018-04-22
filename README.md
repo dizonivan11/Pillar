@@ -96,3 +96,4 @@ Post and Get Forms
 	</body>
 </html>
 ```
+As the user submits the form, the post/get data will be transferred to a dictionary which can be used by the action page.
