@@ -65,10 +65,11 @@ namespace Pillar
                     byte[] buffer = new byte[0];
                     switch (mediaType) {
                         case "phtml":
+                            string phtml = string.Empty;
                             try {
-                                string phtml = File.ReadAllText(ROOT + requestUrl);
-                                buffer = request.ContentEncoding.GetBytes(phtml.ToHtml(POST, GET));
+                                phtml = File.ReadAllText(ROOT + requestUrl);
                             } catch { buffer = request.ContentEncoding.GetBytes("Page not Found"); }
+                            buffer = request.ContentEncoding.GetBytes(phtml.ToHtml(POST, GET));
                             break;
                         default:
                             try {
@@ -82,6 +83,7 @@ namespace Pillar
                     response.OutputStream.Flush();
                 } catch (Exception ex) {
                     Console.WriteLine(ex.Message);
+                    // throw;
                 }
             }).Start();
         }
