@@ -1,6 +1,8 @@
 # Pillar
 ## A CSharp Web Framework
 
+> Pillar is a web framework that uses the power of .NET Framework for creating dynamic pages easily with the help of CSScript Library for scripting.
+
 An example usage of the framework.
 ```csharp
 <!DOCTYPE html>
