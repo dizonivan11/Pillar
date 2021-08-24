@@ -34,7 +34,7 @@ An example usage of the framework.
 	<csharp>
 		Echo("Variable \"mySurname\" = " + VAR["mySurname"].ToString() + "<br><br>");
 		DisplayCurrentDateTime();
-		Student me = new Student("14-41280", "Justin Ivan", "Flores", "Dizon");
+		Student me = new Student("12-34567", "First Name", "Middle Name", "Last Name");
 		Echo("<h3>" + me.FullName() + "</h3>");
 		Echo("<h4>" + me.ToString() + "</h4>");
 	</csharp>
